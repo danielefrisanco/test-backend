@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Titulo:</strong>
+  <%= @lista_de_tarea.titulo %>
+</p>
+
+<p>
+  <strong>Fecha de inicio:</strong>
+  <%= @lista_de_tarea.fecha_de_inicio %>
+</p>
+
+<p>
+  <strong>Fecha de fin:</strong>
+  <%= @lista_de_tarea.fecha_de_fin %>
+</p>
+
+<%= link_to 'Edit', edit_lista_de_tarea_path(@lista_de_tarea) %> |
+<%= link_to 'Back', lista_de_tareas_path %>

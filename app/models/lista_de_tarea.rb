@@ -1,0 +1,2 @@
+class ListaDeTarea < ApplicationRecord
+end

@@ -1,0 +1,32 @@
+<%= form_with(model: lista_de_tarea, local: true) do |form| %>
+  <% if lista_de_tarea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lista_de_tarea.errors.count, "error") %> prohibited this lista_de_tarea from being saved:</h2>
+
+      <ul>
+        <% lista_de_tarea.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :titulo %>
+    <%= form.text_field :titulo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_de_inicio %>
+    <%= form.datetime_select :fecha_de_inicio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fecha_de_fin %>
+    <%= form.datetime_select :fecha_de_fin %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
