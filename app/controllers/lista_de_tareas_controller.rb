@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class ListaDeTareasController < ApplicationController
-  before_action :set_lista_de_tarea, only: [:show, :edit, :update, :destroy]
-  http_basic_authenticate_with name: ENV["HTTP_BASIC_USER"],
-                               password: ENV["HTTP_BASIC_PASSWORD"],
-                               if: -> { ENV["HTTP_BASIC_USER"].present?},
+  before_action :set_lista_de_tarea, only: %i[show edit update destroy]
+  http_basic_authenticate_with name: ENV['HTTP_BASIC_USER'],
+                               password: ENV['HTTP_BASIC_PASSWORD'],
+                               if: -> { ENV['HTTP_BASIC_USER'].present? },
                                only: :lista_de_tareas_with_statuses
 
   # GET /lista_de_tareas
@@ -15,8 +17,7 @@ class ListaDeTareasController < ApplicationController
 
   # GET /lista_de_tareas/1
   # GET /lista_de_tareas/1.json
-  def show
-  end
+  def show; end
 
   # GET /lista_de_tareas/new
   def new
@@ -24,8 +25,7 @@ class ListaDeTareasController < ApplicationController
   end
 
   # GET /lista_de_tareas/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /lista_de_tareas
   # POST /lista_de_tareas.json
@@ -34,13 +34,17 @@ class ListaDeTareasController < ApplicationController
 
     respond_to do |format|
       if @lista_de_tarea.save
-        format.html { redirect_to @lista_de_tarea,
-                      notice: 'Lista de tarea was successfully created.' }
+        format.html do
+          redirect_to @lista_de_tarea,
+                      notice: 'Lista de tarea was successfully created.'
+        end
         format.json { render :show, status: :created, location: @lista_de_tarea }
       else
         format.html { render :new }
-        format.json { render json: @lista_de_tarea.errors,
-                      status: :unprocessable_entity }
+        format.json do
+          render json: @lista_de_tarea.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -50,13 +54,17 @@ class ListaDeTareasController < ApplicationController
   def update
     respond_to do |format|
       if @lista_de_tarea.update(lista_de_tarea_params)
-        format.html { redirect_to @lista_de_tarea,
-                      notice: 'Lista de tarea was successfully updated.' }
+        format.html do
+          redirect_to @lista_de_tarea,
+                      notice: 'Lista de tarea was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @lista_de_tarea }
       else
         format.html { render :edit }
-        format.json { render json: @lista_de_tarea.errors,
-                      status: :unprocessable_entity }
+        format.json do
+          render json: @lista_de_tarea.errors,
+                 status: :unprocessable_entity
+        end
       end
     end
   end
@@ -66,8 +74,10 @@ class ListaDeTareasController < ApplicationController
   def destroy
     @lista_de_tarea.destroy
     respond_to do |format|
-      format.html { redirect_to lista_de_tareas_url,
-                    notice: 'Lista de tarea was successfully destroyed.' }
+      format.html do
+        redirect_to lista_de_tareas_url,
+                    notice: 'Lista de tarea was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
@@ -76,12 +86,15 @@ class ListaDeTareasController < ApplicationController
   def lista_de_tareas_with_statuses
     @lista_de_tareas_with_statuses = ListaDeTarea.all(&:json_with_status)
     respond_to do |format|
-       format.json { render json: @lista_de_tareas_with_statuses,
-                     status: :ok }
+      format.json do
+        render json: @lista_de_tareas_with_statuses,
+               status: :ok
+      end
     end
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_lista_de_tarea
     @lista_de_tarea = ListaDeTarea.find(params[:id])

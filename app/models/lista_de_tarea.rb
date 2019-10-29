@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Wrong name, Tarea would be the correct name
 class ListaDeTarea < ApplicationRecord
   validates_presence_of :titulo, :fecha_de_inicio, :fecha_de_fin
@@ -48,11 +50,11 @@ class ListaDeTarea < ApplicationRecord
   # Adds an error when the date range collides with the range of another tarea
   def unique_range_of_fechas
     ListaDeTarea.all.each do |tarea|
-      if tarea != self  && !(tarea.fecha_de_fin < fecha_de_inicio ||
+      next unless tarea != self && !(tarea.fecha_de_fin < fecha_de_inicio ||
                              tarea.fecha_de_inicio > fecha_de_fin)
-        errors.add(:fechas, 'Una otra tarea es solapadas en el tiempo')
-        break
-      end
+
+      errors.add(:fechas, 'Una otra tarea es solapadas en el tiempo')
+      break
     end
   end
 
