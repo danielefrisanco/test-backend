@@ -28,11 +28,13 @@ class ListaDeTareasController < ApplicationController
 
     respond_to do |format|
       if @lista_de_tarea.save
-        format.html { redirect_to @lista_de_tarea, notice: 'Lista de tarea was successfully created.' }
+        format.html { redirect_to @lista_de_tarea,
+                      notice: 'Lista de tarea was successfully created.' }
         format.json { render :show, status: :created, location: @lista_de_tarea }
       else
         format.html { render :new }
-        format.json { render json: @lista_de_tarea.errors, status: :unprocessable_entity }
+        format.json { render json: @lista_de_tarea.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +44,13 @@ class ListaDeTareasController < ApplicationController
   def update
     respond_to do |format|
       if @lista_de_tarea.update(lista_de_tarea_params)
-        format.html { redirect_to @lista_de_tarea, notice: 'Lista de tarea was successfully updated.' }
+        format.html { redirect_to @lista_de_tarea,
+                      notice: 'Lista de tarea was successfully updated.' }
         format.json { render :show, status: :ok, location: @lista_de_tarea }
       else
         format.html { render :edit }
-        format.json { render json: @lista_de_tarea.errors, status: :unprocessable_entity }
+        format.json { render json: @lista_de_tarea.errors,
+                      status: :unprocessable_entity }
       end
     end
   end
@@ -56,7 +60,8 @@ class ListaDeTareasController < ApplicationController
   def destroy
     @lista_de_tarea.destroy
     respond_to do |format|
-      format.html { redirect_to lista_de_tareas_url, notice: 'Lista de tarea was successfully destroyed.' }
+      format.html { redirect_to lista_de_tareas_url,
+                    notice: 'Lista de tarea was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +72,10 @@ class ListaDeTareasController < ApplicationController
       @lista_de_tarea = ListaDeTarea.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet,
+    # only allow the white list through.
     def lista_de_tarea_params
-      params.require(:lista_de_tarea).permit(:titulo, :fecha_de_inicio, :fecha_de_fin)
+      params.require(:lista_de_tarea)
+            .permit(:titulo, :fecha_de_inicio, :fecha_de_fin)
     end
 end
