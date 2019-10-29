@@ -3,7 +3,7 @@ class ListaDeTarea < ApplicationRecord
   validates_presence_of :titulo, :fecha_de_inicio, :fecha_de_fin
   validate :fin_despues_inicio
   validate :unique_range_of_fechas
-
+  validate :email_format
   # The tareas divided per status
   # @return [<ListaDeTarea>, <ListaDeTarea>, <ListaDeTarea>]
   # pasadas, pendientes, futuras Three lists of tareas
@@ -20,6 +20,8 @@ class ListaDeTarea < ApplicationRecord
     [pasadas, pendientes, futuras]
   end
 
+  # The tarea to json tth the status
+  # @return [Hash] Json of the tarea with the status
   def json_with_status
     as_json.merge(status: status)
   end
@@ -51,6 +53,14 @@ class ListaDeTarea < ApplicationRecord
         errors.add(:fechas, 'Una otra tarea es solapadas en el tiempo')
         break
       end
+    end
+  end
+
+  # Adds an error when the email is not formatted correctly
+  def email_format
+    if correo.present? &&
+       !correo.match(/\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i)
+      errors.add(:fechas, 'El correo es incorrecto')
     end
   end
 end

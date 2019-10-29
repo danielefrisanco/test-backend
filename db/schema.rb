@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_29_173551) do
+ActiveRecord::Schema.define(version: 2019_10_29_203638) do
 
   create_table "lista_de_tareas", force: :cascade do |t|
     t.string "titulo"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_10_29_173551) do
     t.datetime "fecha_de_fin"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "correo"
   end
 
 end

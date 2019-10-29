@@ -91,6 +91,6 @@ class ListaDeTareasController < ApplicationController
   # only allow the white list through.
   def lista_de_tarea_params
     params.require(:lista_de_tarea)
-          .permit(:titulo, :fecha_de_inicio, :fecha_de_fin)
+          .permit(:titulo, :fecha_de_inicio, :fecha_de_fin, :correo)
   end
 end
