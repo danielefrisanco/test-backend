@@ -1,5 +1,9 @@
 class ListaDeTareasController < ApplicationController
   before_action :set_lista_de_tarea, only: [:show, :edit, :update, :destroy]
+  http_basic_authenticate_with name: ENV["HTTP_BASIC_USER"],
+                               password: ENV["HTTP_BASIC_PASSWORD"],
+                               if: -> { ENV["HTTP_BASIC_USER"].present?},
+                               only: :lista_de_tareas_with_statuses
 
   # GET /lista_de_tareas
   # GET /lista_de_tareas.json
@@ -7,7 +11,6 @@ class ListaDeTareasController < ApplicationController
     @lista_de_tareas_pasadas,
     @lista_de_tareas_pendientes,
     @lista_de_tareas_futuras = ListaDeTarea.by_status
-
   end
 
   # GET /lista_de_tareas/1
