@@ -4,7 +4,10 @@ class ListaDeTareasController < ApplicationController
   # GET /lista_de_tareas
   # GET /lista_de_tareas.json
   def index
-    @lista_de_tareas = ListaDeTarea.all
+    @lista_de_tareas_pasadas,
+    @lista_de_tareas_pendientes,
+    @lista_de_tareas_futuras = ListaDeTarea.by_status
+
   end
 
   # GET /lista_de_tareas/1
@@ -66,16 +69,25 @@ class ListaDeTareasController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_lista_de_tarea
-      @lista_de_tarea = ListaDeTarea.find(params[:id])
+  # GET /lista_de_tareas_with_statuses/
+  def lista_de_tareas_with_statuses
+    @lista_de_tareas_with_statuses = ListaDeTarea.all(&:json_with_status)
+    respond_to do |format|
+       format.json { render json: @lista_de_tareas_with_statuses,
+                     status: :ok }
     end
+  end
 
-    # Never trust parameters from the scary internet,
-    # only allow the white list through.
-    def lista_de_tarea_params
-      params.require(:lista_de_tarea)
-            .permit(:titulo, :fecha_de_inicio, :fecha_de_fin)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_lista_de_tarea
+    @lista_de_tarea = ListaDeTarea.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet,
+  # only allow the white list through.
+  def lista_de_tarea_params
+    params.require(:lista_de_tarea)
+          .permit(:titulo, :fecha_de_inicio, :fecha_de_fin)
+  end
 end

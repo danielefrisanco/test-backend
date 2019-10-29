@@ -15,5 +15,10 @@
   <%= @lista_de_tarea.fecha_de_fin %>
 </p>
 
+<p>
+  <strong>Status:</strong>
+  <%= @lista_de_tarea.status %>
+</p>
+
 <%= link_to 'Edit', edit_lista_de_tarea_path(@lista_de_tarea) %> |
 <%= link_to 'Back', lista_de_tareas_path %>
