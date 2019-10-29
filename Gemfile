@@ -57,3 +57,5 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'rspec'
 gem 'rubocop'
+gem 'delayed_job_active_record'
+gem 'daemons'
